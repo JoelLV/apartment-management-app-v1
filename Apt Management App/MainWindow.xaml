@@ -1,0 +1,29 @@
+﻿<Window x:Class="Apt_Management_App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Apt_Management_App"
+        xmlns:viewmodels="clr-namespace:Apt_Management_App.ViewModels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="900">
+    <Window.DataContext>
+        <viewmodels:MainViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <DataGrid HorizontalAlignment="Left" Height="407" Margin="184,67,0,0"  VerticalAlignment="Top" SelectedItem="{Binding SelectedRow}" CanUserDeleteRows="False" Width="706" ItemsSource="{Binding DataToDisplay, Mode=TwoWay}" Grid.ColumnSpan="2" >
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DeleteRowCommand}"/>
+            </DataGrid.InputBindings>
+            <DataGrid.RowValidationRules>
+                <viewmodels:Validation ValidationStep="UpdatedValue"/>
+            </DataGrid.RowValidationRules>
+        </DataGrid>
+        <ListBox HorizontalAlignment="Left" Height="407" Margin="10,67,0,0" VerticalAlignment="Top" Width="174" SelectedItem="{Binding TableNameSelected}" ItemsSource="{Binding TableNames}" Grid.ColumnSpan="2"/>
+        <Label HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Content="Select name of table to display in the datagrid" HorizontalAlignment="Left" Height="52" Margin="10,10,0,0" VerticalAlignment="Top" Width="174" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>
